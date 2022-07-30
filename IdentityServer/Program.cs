@@ -13,7 +13,7 @@ builder.Services.AddIdentityServer(option =>
 
     option.EmitStaticAudienceClaim = true;
 })
-.AddTestUsers(new List<TestUser>())
+.AddTestUsers(TestUsers.Users)
 .AddInMemoryClients(Config.Clients)
 .AddInMemoryApiResources(Config.ApiResources)
 .AddInMemoryApiScopes(Config.ApiScopes)
