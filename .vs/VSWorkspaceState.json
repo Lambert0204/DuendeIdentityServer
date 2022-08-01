@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\IdentityServer",
-    "\\IdentityServer\\Properties"
+    "\\IdentityServer\\Properties",
+    "\\InternalApi",
+    "\\InternalApi\\Controllers"
   ],
-  "SelectedNode": "\\IdentityServer\\IdentityServer.csproj",
   "PreviewInSolutionExplorer": false
 }
