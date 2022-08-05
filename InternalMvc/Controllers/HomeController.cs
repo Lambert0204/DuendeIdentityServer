@@ -3,16 +3,20 @@ using Microsoft.AspNetCore.Mvc;
 using InternalMvc.Models;
 using Newtonsoft.Json;
 using WeatherMVC.Models;
+using InternalMVC.Services;
+using IdentityModel.Client;
 
 namespace InternalMvc.Controllers;
 
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    private readonly ITokenService _tokenService;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger, ITokenService tokenService)
     {
         _logger = logger;
+        _tokenService = tokenService;
     }
 
     public IActionResult Index()
@@ -28,6 +32,10 @@ public class HomeController : Controller
     public async Task<IActionResult> Weather()
     {
         using var client = new HttpClient();
+
+        var token = await _tokenService.GetToken("weatherapi.read");
+
+        client.SetBearerToken(token.AccessToken);
 
         var result = await client.GetAsync("https://localhost:5445/weatherforecast");
 
