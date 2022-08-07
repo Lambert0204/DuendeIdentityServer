@@ -53,12 +53,12 @@ public static class Config
                     
                 AllowedGrantTypes = GrantTypes.Code,
 
-                RedirectUris = { "https://localhost:44300/signin-oidc" },
-                FrontChannelLogoutUri = "https://localhost:44300/signout-oidc",
-                PostLogoutRedirectUris = { "https://localhost:44300/signout-callback-oidc" },
+                RedirectUris = { "https://localhost:5444/home/signin" },
+                FrontChannelLogoutUri = "https://localhost:5444/home/signout",
+                PostLogoutRedirectUris = { "https://localhost:5444/home/callback" },
 
                 AllowOfflineAccess = true,
-                AllowedScopes = { "openid", "profile", "weatherapi" }
+                AllowedScopes = { "openid", "profile", "weatherapi.read" }
             },
         };
 }

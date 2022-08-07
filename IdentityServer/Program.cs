@@ -4,6 +4,7 @@ using Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddRazorPages();
 builder.Services.AddIdentityServer(option => 
 {
     option.Events.RaiseErrorEvents = true;
@@ -20,8 +21,12 @@ builder.Services.AddIdentityServer(option =>
 .AddInMemoryIdentityResources(Config.IdentityResources);
 
 var app = builder.Build();
-app.UseIdentityServer();
 
-app.MapGet("/", () => "Hello World!");
+app.UseIdentityServer();
+// app.MapGet("/", () => "Hello World!");
+app.UseStaticFiles();
+app.UseRouting();
+app.UseAuthorization();
+app.MapRazorPages().RequireAuthorization();
 
 app.Run();

@@ -7,6 +7,29 @@ builder.Services.AddControllersWithViews();
 builder.Services.Configure<IdentityServerSettings>(builder.Configuration.GetSection("IdentityServerSettings"));
 builder.Services.AddSingleton<ITokenService, TokenService>();
 
+builder.Services
+    .AddAuthentication(options =>
+    {
+        options.DefaultScheme = "cookie";
+        options.DefaultChallengeScheme = "oidc";
+    })
+    .AddCookie("cookie")
+    .AddOpenIdConnect("oidc", options =>
+    {
+        options.Authority = builder.Configuration["InteractiveServerSettings:AuthorityUrl"];
+        options.ClientId = builder.Configuration["InteractiveServerSettings:ClientId"];
+        options.ClientSecret = builder.Configuration["InteractiveServerSettings:ClientSecret"];
+        options.Scope.Add(builder.Configuration["InteractiveServerSettings:Scopes:0"]);
+        options.Scope.Add(builder.Configuration["InteractiveServerSettings:Scopes:1"]);
+        options.Scope.Add(builder.Configuration["InteractiveServerSettings:Scopes:2"]);
+        options.CallbackPath = "/home/signin";
+
+        options.ResponseType = "code";
+        options.UsePkce = true;
+        options.ResponseMode = "query";
+        options.SaveTokens  = true;
+    });
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -21,7 +44,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

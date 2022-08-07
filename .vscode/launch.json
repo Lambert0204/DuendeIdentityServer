@@ -45,6 +45,23 @@
             }
         },
         {
+            "name": ".NET Core Launch (IdServ)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/IdentityServer/bin/Debug/net6.0/IdentityServer.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/IdentityServer",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        },
+        {
             "name": ".NET Core Attach",
             "type": "coreclr",
             "request": "attach"
