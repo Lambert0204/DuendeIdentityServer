@@ -50,8 +50,9 @@ public class HomeController : Controller
     {
         using var client = new HttpClient();
 
-        var token = await HttpContext.GetTokenAsync("access_token");
+        //var token = await _tokenService.GetToken("weatherapi.read");
 
+        var token = await HttpContext.GetTokenAsync("access_token");
         client.SetBearerToken(token);
 
         var result = await client.GetAsync("https://localhost:5445/weatherforecast");

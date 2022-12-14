@@ -31,7 +31,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
         options.Authority = "https://localhost:5443";
-        options.Audience = "weatherapi";
+        options.Audience = "internal";
 
         options.TokenValidationParameters.ValidTypes =  new[] { "at+jwt" };
     });
