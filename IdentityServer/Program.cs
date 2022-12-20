@@ -12,7 +12,7 @@ builder.Services.AddIdentityServer(option =>
     option.Events.RaiseFailureEvents = true;
     option.Events.RaiseSuccessEvents = true;
 
-    option.EmitStaticAudienceClaim = true;
+    //option.EmitStaticAudienceClaim = true;
 })
 .AddTestUsers(TestUsers.Users)
 .AddInMemoryClients(Config.Clients)
